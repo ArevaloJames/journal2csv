@@ -19,9 +19,10 @@
     </div>
     
     <div id="countsAlert" class="text-center alert alert-info" role="alert">
-        Fuels: @Model.FuelsRowCount rows<br>
-        Safe Drop: @Model.SafeDropRowCount rows<br>
-        Lubes: @Model.LubesRowCount rows
+        <!-- Format row counts with commas -->
+        Fuels: @String.Format("{0:n0}", Model.FuelsRowCount) rows<br>
+        Safe Drop: @String.Format("{0:n0}", Model.SafeDropRowCount) rows<br>
+        Lubes: @String.Format("{0:n0}", Model.LubesRowCount) rows
     </div>
 </body>
 <div class="text-center">
