@@ -14,9 +14,6 @@ namespace ExportingSqliteToCsv.Controllers
         {
             _logger = logger;
         }
-
-
-
         public async Task<IActionResult> Index()
         {
             string sqliteFilePath = Path.Combine("D:\\RealSoft\\RealPOS\\realhq\\", "journal.sqlite");
@@ -34,13 +31,11 @@ namespace ExportingSqliteToCsv.Controllers
             await Task.Delay(5000);
             return RedirectToAction("FirstPage");
         }
-
         public IActionResult FirstPage()
         {
             return View();
 
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -51,8 +46,6 @@ namespace ExportingSqliteToCsv.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -71,7 +64,6 @@ namespace ExportingSqliteToCsv.Controllers
                 var resultDict = new Dictionary<string, List<object>>();
                 var resultDictSafedrop = new Dictionary<string, List<object>>();
                 var resultDictLubes = new Dictionary<string, List<object>>();
-
 
                 using (var sqliteConnection = new SqliteConnection($"Data Source={sqliteFilePath};"))
                 {
@@ -265,11 +257,9 @@ namespace ExportingSqliteToCsv.Controllers
                                 {
                                     resultDictSafedrop[columnName].Add(reader[columnName]);
                                 }
-
-
-
                             }
                         }
+
                         using (var commandLubes = new SqliteCommand(@"
                         SELECT DISTINCT
                         s1.*
@@ -325,8 +315,7 @@ namespace ExportingSqliteToCsv.Controllers
                         ITEMCODE 
                         ORDER BY 
                         INV_DATE,
-                        ITEMCODE
-", sqliteConnection))
+                        ITEMCODE", sqliteConnection))
                         {
                             using (var reader = commandLubes.ExecuteReader())
                             {
@@ -353,7 +342,6 @@ namespace ExportingSqliteToCsv.Controllers
                                 }
                             }
                         }
-
                         try
                         {
                             string folderPath = "D:\\Flowmeter\\CSV";
@@ -386,16 +374,10 @@ namespace ExportingSqliteToCsv.Controllers
 
                             return RedirectToAction("Index");
                         }
-
-
-
                     }
-
                 }
-
-
-
             }
+
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred while uptading the CSV files.");
@@ -403,14 +385,9 @@ namespace ExportingSqliteToCsv.Controllers
                 // Set error message if CSV export fails
                 TempData["ExportErrorPrompt"] = "Please Contact MIS - Enterprise.";
 
-
                 return RedirectToAction("Index");
 
             }
-
-
-
-
         }
 
         void ExportToCsv(Dictionary<string, List<object>> dataDict, string folderPath, string fileType)
@@ -467,10 +444,7 @@ namespace ExportingSqliteToCsv.Controllers
             // Render the view and pass the view model to it
             return View("RowCountsView", viewModel);
         }
-
     }
-
-
 }
 
 
