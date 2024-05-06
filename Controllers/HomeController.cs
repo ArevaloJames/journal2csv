@@ -23,8 +23,6 @@ namespace ExportingSqliteToCsv.Controllers
                 TempData["ExportError"] = "Database is not found.";
                 TempData["ExportErrorPrompt"] = "Please contact MIS - Enterprise.";
 
-                await Task.Delay(5000);
-
                 return RedirectToAction("FirstPage");
             }
 
@@ -58,7 +56,9 @@ namespace ExportingSqliteToCsv.Controllers
                 if (!System.IO.File.Exists(sqliteFilePath))
                 {
                     TempData["ExportError"] = "Database is not found.";
+                    TempData["ExportErrorPrompt"] = "Please contact MIS - Enterprise.";
 
+                    return RedirectToAction("FirstPage");
                 }
 
                 var resultDict = new Dictionary<string, List<object>>();
