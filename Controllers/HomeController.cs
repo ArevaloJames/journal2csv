@@ -336,9 +336,6 @@ namespace ExportingSqliteToCsv.Controllers
                                     {
                                         resultDictLubes[columnName].Add(reader[columnName]);
                                     }
-
-
-
                                 }
                             }
                         }
